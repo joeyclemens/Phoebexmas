@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My 2026 Christmas List</title>
+<meta name="description" content="My Christmas wish list for 2026">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg1:#0f3d2e; --bg2:#0a2a20;
+    --red:#c8102e; --red-dark:#9d0c24;
+    --gold:#f5c542; --cream:#fff8ec; --ink:#2b2b2b; --muted:#6b6458;
+    --card:#fffaf0;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; font-family:'Nunito',system-ui,sans-serif; color:var(--ink);
+    background:radial-gradient(ellipse at top,var(--bg1),var(--bg2)) fixed;
+    min-height:100vh; overflow-x:hidden;
+  }
+
+  /* snow */
+  .snow{position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden}
+  .flake{
+    position:absolute; top:-10vh; color:#fff; opacity:.8; user-select:none;
+    animation:fall linear infinite, sway ease-in-out infinite alternate;
+  }
+  @keyframes fall{to{transform:translateY(115vh)}}
+  @keyframes sway{from{margin-left:-14px}to{margin-left:14px}}
+  @media (prefers-reduced-motion:reduce){.flake{animation:none; top:auto}}
+
+  /* lights */
+  .lights{
+    position:relative; z-index:2; height:46px; margin:0; padding:0; list-style:none;
+    display:flex; justify-content:space-around; align-items:flex-start;
+    border-top:0;
+  }
+  .lights::before{
+    content:""; position:absolute; left:0; right:0; top:8px; height:2px; background:#1c1c1c;
+  }
+  .lights li{
+    position:relative; width:14px; height:22px; margin-top:10px; border-radius:50% 50% 55% 55%;
+    animation:glow 2s ease-in-out infinite;
+  }
+  .lights li::before{
+    content:""; position:absolute; top:-5px; left:3px; width:8px; height:7px; background:#333; border-radius:2px;
+  }
+  .lights li:nth-child(4n+1){background:#ff3b4e; box-shadow:0 0 14px 4px rgba(255,59,78,.7)}
+  .lights li:nth-child(4n+2){background:var(--gold); box-shadow:0 0 14px 4px rgba(245,197,66,.7); animation-delay:.5s}
+  .lights li:nth-child(4n+3){background:#4cd97b; box-shadow:0 0 14px 4px rgba(76,217,123,.7); animation-delay:1s}
+  .lights li:nth-child(4n){background:#5ab8ff; box-shadow:0 0 14px 4px rgba(90,184,255,.7); animation-delay:1.5s}
+  @keyframes glow{50%{opacity:.45}}
+  @media (prefers-reduced-motion:reduce){.lights li{animation:none}}
+
+  main{position:relative; z-index:1; max-width:980px; margin:0 auto; padding:8px 16px 60px}
+
+  header{text-align:center; color:var(--cream); padding:20px 0 28px}
+  header .tree{font-size:3rem; line-height:1}
+  h1{
+    font-family:'Mountains of Christmas',cursive; font-size:clamp(2.4rem,9vw,4.4rem);
+    margin:.1em 0 .05em; color:var(--cream); text-shadow:0 3px 0 var(--red-dark), 0 0 30px rgba(245,197,66,.35);
+  }
+  h1 span{color:var(--gold)}
+  header p{margin:0 auto; max-width:34ch; opacity:.9; font-size:1.05rem}
+
+  .section{margin-top:34px}
+  .section h2{
+    font-family:'Mountains of Christmas',cursive; font-size:1.9rem; color:var(--gold);
+    margin:0 0 14px; display:flex; align-items:center; gap:10px;
+  }
+  .section h2::after{content:""; flex:1; height:2px; background:linear-gradient(90deg,var(--gold),transparent); opacity:.6}
+
+  .grid{display:grid; gap:14px; grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+
+  .card{
+    position:relative; background:var(--card); border-radius:16px; padding:16px 16px 14px 20px;
+    display:flex; flex-direction:column; gap:10px; min-height:132px;
+    box-shadow:0 6px 18px rgba(0,0,0,.28); overflow:hidden;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .card::before{
+    content:""; position:absolute; left:0; top:0; bottom:0; width:8px;
+    background:repeating-linear-gradient(45deg,var(--red) 0 10px,#fff 10px 20px);
+  }
+  .card:hover{transform:translateY(-3px) rotate(-.3deg); box-shadow:0 10px 24px rgba(0,0,0,.38)}
+  .card h3{margin:0; font-size:1.02rem; font-weight:800; line-height:1.3}
+  .store{font-size:.78rem; color:var(--muted); font-weight:600; margin-top:-4px}
+  .tags{display:flex; flex-wrap:wrap; gap:6px}
+  .tag{
+    font-size:.78rem; font-weight:800; padding:3px 10px; border-radius:999px;
+    background:#fde9c9; color:#7a4a00; border:1px solid #f3cf92;
+  }
+  .tag.size{background:#e3f1e8; color:#14583a; border-color:#b8dcc7}
+  .btn{
+    margin-top:auto; align-self:flex-start; text-decoration:none; font-weight:800; font-size:.88rem;
+    color:#fff; background:var(--red); padding:8px 16px; border-radius:999px;
+    transition:background .15s, transform .15s;
+  }
+  .btn:hover{background:var(--red-dark); transform:scale(1.04)}
+  .btn:focus-visible{outline:3px solid var(--gold); outline-offset:2px}
+
+  /* gift-giver mode (only shown when the secret code is used) */
+  .gifter{
+    position:sticky; top:8px; z-index:5; margin:0 auto 6px; max-width:560px;
+    background:rgba(255,248,236,.96); color:var(--ink); border-radius:999px;
+    padding:8px 16px; display:flex; align-items:center; justify-content:center; gap:10px;
+    font-weight:800; font-size:.88rem; box-shadow:0 6px 18px rgba(0,0,0,.35);
+  }
+  .gifter[hidden]{display:none}
+  .gifter small{font-weight:600; color:var(--muted)}
+  .buy{
+    margin-top:auto; align-self:flex-start; font:inherit; font-weight:800; font-size:.85rem; cursor:pointer;
+    color:#14583a; background:#e3f1e8; border:2px solid #b8dcc7; padding:6px 14px; border-radius:999px;
+    transition:background .15s, transform .15s;
+  }
+  .buy:hover{background:#d2ead9; transform:scale(1.04)}
+  .buy:focus-visible{outline:3px solid var(--gold); outline-offset:2px}
+  .buy:disabled{opacity:.6; cursor:wait}
+  .actions{display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:auto}
+  .actions .btn,.actions .buy{margin-top:0}
+  .card.bought{opacity:.62}
+  .card.bought h3{text-decoration:line-through; text-decoration-thickness:2px}
+  .card.bought .buy{background:#14583a; color:#fff; border-color:#14583a}
+  .card .ribbon{
+    display:none; position:absolute; top:10px; right:-30px; transform:rotate(35deg);
+    background:#14583a; color:#fff; font-size:.7rem; font-weight:800; letter-spacing:.04em;
+    padding:3px 34px; text-transform:uppercase;
+  }
+  .card.bought .ribbon{display:block}
+
+  footer{text-align:center; color:var(--cream); opacity:.85; margin-top:46px; font-size:.95rem}
+  footer .big{font-family:'Mountains of Christmas',cursive; font-size:1.8rem; color:var(--gold); opacity:1}
+</style>
+</head>
+<body>
+
+<div class="snow" id="snow" aria-hidden="true"></div>
+
+<ul class="lights" aria-hidden="true" id="lights"></ul>
+
+<main>
+  <header>
+    <div class="tree">🎄</div>
+    <h1>My <span>2026</span> Christmas List</h1>
+    <p>Gift ideas, with sizes and colours. Tap a button to see the item. ✨</p>
+  </header>
+
+  <div class="gifter" id="gifter" hidden>
+    🎁 <span id="gifterCount"></span> <small>Gift-giver view. Only you can see this.</small>
+  </div>
+
+  <div id="content"></div>
+
+  <footer>
+    <div class="big">Merry Christmas! 🎅</div>
+    <p>Thank you for being the best 💚❤️</p>
+  </footer>
+</main>
+
+<script>
+const sections = [
+  { title: "👚 Clothes", items: [
+    { name: "UO Heavenly Hotfix Slash Neck Graphic Tee", store: "Urban Outfitters", colour: "Pink", size: "M", url: "https://www.urbanoutfitters.com/en-gb/shop/uo-heavenly-hotfix-slash-neck-t-shirt" },
+    { name: "Short Sleeve Icon Henley", store: "Hollister", colour: "Navy stripe", size: "M", url: "https://www.hollisterco.com/shop/uk/p/short-sleeve-icon-henley-63757419-1005" },
+    { name: "Skater Girl Washed Low Rise Baggy Jeans", store: "Edikted", colour: "Light blue", size: "L", url: "https://edikted.co.uk/products/s17695_light-blue?__ptLanguage=en-US" },
+    { name: "Angel Black Hoodie", store: "In Print We Trust", size: "L", url: "https://inprintwetrust.co/products/angel-black-hoodie" }
+  ]},
+  { title: "🧴 Smellies & Hair", items: [
+    { name: "Sticky Dates Body Spray", store: "LUSH", url: "https://www.lush.com/uk/en/p/sticky-dates-body-spray-" },
+    { name: "Reversible Satin Hair Bonnet", store: "Bounce Curl", colour: "Teal", url: "https://www.bouncecurl.com/products/hair-bonnet" }
+  ]},
+  { title: "🦸 Funko Pops", items: [
+    { name: "Mystery Pop! Keychain Marvel", store: "Funko", url: "https://funko.com/gb/mystery-pop-keychain-marvel/97584.html" },
+    { name: "Pop! Yelena Belova (Doomsday)", store: "Funko", url: "https://funko.com/gb/pop-yelena-belova-doomsday/90472.html" }
+  ]},
+  { title: "💄 Make-up", items: [
+    { name: "e.l.f. Power Grip Face Primer", store: "e.l.f. Cosmetics", size: "Jumbo 2.5 oz / 75 ml", url: "https://www.elfcosmetics.co.uk/products/power-grip-primer?Size=Jumbo+2.5+oz+%2F+75+ml" },
+    { name: "16-Hour Camo Full Coverage Concealer", store: "e.l.f. Cosmetics", url: "https://www.elfcosmetics.co.uk/products/16hr-camo-concealer" },
+    { name: "Rimmel Lasting Finish 8Hr Lip Liner", store: "Superdrug", colour: "705 Cappuccino", url: "https://www.superdrug.com/make-up/lips/lip-liners/rimmel-lasting-finish-8hr-lip-liner-705-cappuccino/p/795692" },
+    { name: "NYX Buttermelt Blush", store: "Superdrug", colour: "Butta Together", url: "https://www.superdrug.com/make-up/face/blusher/nyx-professional-makeup-buttermelt-blush-butta-together/p/843717" },
+    { name: "Rimmel Natural Bronzer", store: "Superdrug", colour: "002 Sunbronze", url: "https://www.superdrug.com/make-up/face/bronzer-and-palettes/matte-bronzing-powder/rimmel-natural-bronzer-001-sunlight/p/806790?varSel=806791" },
+    { name: "Maybelline Fit Me Matte & Poreless Powder", store: "Superdrug", colour: "Ivory", url: "https://www.superdrug.com/make-up/face/face-powder/maybelline-fit-me-matte-poreless-powder-ivory/p/750369" },
+    { name: "L'Oréal Paris Telescopic Waterproof Mascara", store: "Superdrug", colour: "Black", url: "https://www.superdrug.com/make-up/eye-makeup/mascara/loreal-paris-telescopic-waterproof-mascara-black/p/849467" }
+  ]},
+  { title: "👜 Bags & Riding", items: [
+    { name: "BDG Xion Scarf Shoulder Bag", store: "Urban Outfitters", url: "https://www.urbanoutfitters.com/en-gb/shop/bdg-xion-scarf-shoulder-bag" },
+    { name: "3D Mesh Riding Gloves", store: "Le Mieux", colour: "Black", url: "https://www.lemieux.com/3d-mesh-riding-gloves-black-4524" }
+  ]},
+  { title: "📦 Amazon Finds", items: [
+    { name: "The Glass Girl by Kathleen Glasgow", store: "Amazon", url: "https://amzn.eu/d/03mfbYT2" },
+    { name: "How to Make Friends with the Dark by Kathleen Glasgow", store: "Amazon", url: "https://amzn.eu/d/086SaRzl" },
+    { name: "Not Your Mother's Curl Talk (2 pack, 6 fl oz each)", store: "Amazon", colour: "Citrus Jasmine scent", url: "https://amzn.eu/d/02dmcRfF" },
+    { name: "Resin Jelly AB Rhinestones Bedazzler Kit (38,000 pcs, 42 colours, with B7000 glue & tools)", store: "Amazon", url: "https://amzn.eu/d/0fugvrvZ" },
+    { name: "LEGO Marvel Spider-Man Keyring (854290)", store: "Amazon", url: "https://amzn.eu/d/0iPMeLad" },
+    { name: "Catrice Eyebrow Stylist Pencil", store: "Amazon", colour: "035 Brown Eye Crown", url: "https://amzn.eu/d/0eZzgdgb" }
+  ]}
+];
+
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+// Stable id per item (hash of its link) so purchased ticks survive reordering/renaming
+const itemId = url => {
+  let h = 5381;
+  for (let k = 0; k < url.length; k++) h = ((h << 5) + h + url.charCodeAt(k)) >>> 0;
+  return 'i' + h.toString(36);
+};
+const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
+
+document.getElementById('content').innerHTML = sections.map(sec => `
+  <section class="section">
+    <h2>${esc(sec.title)}</h2>
+    <div class="grid">
+      ${sec.items.map(i => `
+        <article class="card" data-id="${itemId(i.url)}">
+          <span class="ribbon" aria-hidden="true">Bought</span>
+          <h3>${esc(i.name)}</h3>
+          ${i.store ? `<div class="store">${esc(i.store)}</div>` : ''}
+          ${(i.colour || i.size) ? `<div class="tags">
+            ${i.colour ? `<span class="tag">🎨 ${esc(i.colour)}</span>` : ''}
+            ${i.size ? `<span class="tag size">📏 ${esc(i.size)}</span>` : ''}
+          </div>` : ''}
+          <div class="actions">
+            <a class="btn" href="${esc(i.url)}" target="_blank" rel="noopener noreferrer">View item →</a>
+          </div>
+        </article>`).join('')}
+    </div>
+  </section>`).join('');
+
+// ---------- Gift-giver mode ----------
+// Open the page once with ?code=YOUR_SECRET and this browser remembers it.
+// Without the code the page is a plain list, so she never sees what has been bought.
+(function () {
+  const API = '/api/purchased';
+  const params = new URLSearchParams(location.search);
+  let code = params.get('code');
+  try {
+    if (code) {
+      localStorage.setItem('giftCode', code);
+      history.replaceState(null, '', location.pathname); // keep the code out of the address bar
+    } else {
+      code = localStorage.getItem('giftCode');
+    }
+  } catch (e) { /* storage blocked: fall back to the code in the URL only */ }
+  if (!code) return;
+
+  const bar = document.getElementById('gifter');
+  const countEl = document.getElementById('gifterCount');
+  const cards = [...document.querySelectorAll('.card')];
+  const bought = new Set();
+
+  const refresh = () => {
+    cards.forEach(c => {
+      const on = bought.has(c.dataset.id);
+      c.classList.toggle('bought', on);
+      const b = c.querySelector('.buy');
+      if (b) { b.textContent = on ? '✓ Purchased (undo)' : 'Mark as purchased'; b.setAttribute('aria-pressed', on); }
+    });
+    countEl.textContent = bought.size + ' of ' + totalItems + ' bought';
+  };
+
+  async function toggle(card, btn) {
+    const id = card.dataset.id, want = !bought.has(id);
+    want ? bought.add(id) : bought.delete(id);   // optimistic
+    refresh(); btn.disabled = true;
+    try {
+      const r = await fetch(API, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ code, id, purchased: want })
+      });
+      if (!r.ok) throw new Error(r.status);
+    } catch (e) {
+      want ? bought.delete(id) : bought.add(id);  // roll back
+      refresh();
+      alert("Couldn't save that, please try again.");
+    } finally { btn.disabled = false; }
+  }
+
+  fetch(API + '?code=' + encodeURIComponent(code), { cache: 'no-store' })
+    .then(r => {
+      if (r.status === 401) { try { localStorage.removeItem('giftCode'); } catch (e) {} throw new Error('bad code'); }
+      if (!r.ok) throw new Error(r.status);
+      return r.json();
+    })
+    .then(data => {
+      data.purchased.forEach(id => bought.add(id));
+      cards.forEach(c => {
+        const b = document.createElement('button');
+        b.type = 'button'; b.className = 'buy';
+        b.addEventListener('click', () => toggle(c, b));
+        c.querySelector('.actions').appendChild(b);
+      });
+      bar.hidden = false;
+      refresh();
+    })
+    .catch(() => { /* wrong code or offline: stay as the plain list */ });
+})();
+
+// string of lights
+const lights = document.getElementById('lights');
+lights.innerHTML = '<li></li>'.repeat(Math.max(12, Math.floor(window.innerWidth / 55)));
+
+// snowfall
+const snow = document.getElementById('snow');
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  for (let i = 0; i < 40; i++) {
+    const f = document.createElement('div');
+    f.className = 'flake';
+    f.textContent = Math.random() > .3 ? '❄' : '•';
+    f.style.left = Math.random() * 100 + 'vw';
+    f.style.fontSize = (8 + Math.random() * 16) + 'px';
+    f.style.animationDuration = (9 + Math.random() * 12) + 's, ' + (2 + Math.random() * 3) + 's';
+    f.style.animationDelay = (-Math.random() * 15) + 's, 0s';
+    snow.appendChild(f);
+  }
+}
+</script>
+</body>
+</html>
